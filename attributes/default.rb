@@ -8,3 +8,5 @@ default['mackerel-agent']['package-action'] = :upgrade
 default['mackerel-agent']['start_on_setup'] = true
 
 default['mackerel-agent']['plugins']['package-action'] = :upgrade
+
+default['mackerel-agetn']['gem']['proxy'] = nil

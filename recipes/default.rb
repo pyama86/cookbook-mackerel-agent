@@ -11,6 +11,7 @@ whyrun_config = Chef::Config[:why_run]
 begin
   Chef::Config[:why_run] = false
   chef_gem "toml" do
+    options "-r -p #{default['mackerel-agetn']['gem']['proxy']}"
     action :install
     compile_time true if respond_to?(:compile_time)
   end
