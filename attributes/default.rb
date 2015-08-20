@@ -10,3 +10,4 @@ default['mackerel-agent']['start_on_setup'] = true
 default['mackerel-agent']['plugins']['package-action'] = :upgrade
 
 default['mackerel-agent']['gem']['proxy'] = nil
+default['yum']['main']['proxy'] = nil
