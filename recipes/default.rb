@@ -10,10 +10,8 @@
 whyrun_config = Chef::Config[:why_run]
 begin
   Chef::Config[:why_run] = false
-  chef_gem "toml" do
-    options ("-r -p #{node['mackerel-agent']['gem']['proxy']}")
-    action :install
-    compile_time true if respond_to?(:compile_time)
+  gem_package "toml" do
+    options ("--http-proxy #{node['mackerel-agent']['gem']['proxy']}")
   end
 ensure
   Chef::Config[:why_run] = whyrun_config
