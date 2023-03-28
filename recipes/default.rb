@@ -10,7 +10,7 @@
 whyrun_config = Chef::Config[:why_run]
 begin
   Chef::Config[:why_run] = false
-  chef_gem "toml" do
+  chef_gem "toml-rb" do
     action :install
     compile_time true if respond_to?(:compile_time)
   end
@@ -18,7 +18,7 @@ ensure
   Chef::Config[:why_run] = whyrun_config
 end
 
-require "toml"
+require 'toml-rb'
 
 gpgkey_url = 'https://mackerel.io/file/cert/GPG-KEY-mackerel'
 gpgkey_url_v2 = 'https://mackerel.io/file/cert/GPG-KEY-mackerel-v2'
@@ -92,7 +92,7 @@ file "/etc/mackerel-agent/mackerel-agent.conf" do
   owner "root"
   group "root"
   mode 0644
-  content lazy { TOML::Generator.new(node['mackerel-agent']['conf']).body }
+  content lazy { TomlRB::dump(node['mackerel-agent']['conf'].compact) }
   if node['mackerel-agent']['start_on_setup']
     notifies :restart, 'service[mackerel-agent]'
   end
